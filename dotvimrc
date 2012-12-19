@@ -1,0 +1,219 @@
+" vimrc by Bl4ckB1rd
+" init: 2011/04/13
+" last: 2012/06/13
+" TODO: reordenar este archivo
+
+set nocompatible
+" pathogen
+"" vim plugin administrator:
+""   . install plugins in ~/.vim/bundle/name_plugin/plugin.vim
+filetype off
+call pathogen#helptags()
+call pathogen#runtime_append_all_bundles()
+
+" set vim options
+" change the mapleader from \ to ,
+let mapleader=","
+"" Saving marks and jumps
+set viminfo='100,f1
+"" History records
+set history=5000
+set undolevels=1000      " use many muchos levels of undo
+"" display incomplete command
+set showcmd
+"" searching options
+set incsearch
+set ignorecase
+set smartcase
+set hlsearch      " highlight search terms
+set incsearch     " show search matches as you type
+nmap <silent> ,/ :nohlsearch<CR>
+
+set visualbell           " don't beep
+set noerrorbells         " don't beep
+set wildmode=longest:full,full
+set wildmenu
+" Highlight Warning on 79+ lines and Error on 81+
+au BufWinEnter * let w:m1=matchadd('Search', '\%<81v.\%>79v', -1)
+au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+
+autocmd BufEnter * lcd %:p:h " change directory the current file's
+
+autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal! g`\"" |
+    \ endif
+
+" themes options
+"" 256 colors support =)
+set t_Co=256
+"set background=dark
+"" show the cursor position all the time
+set ruler
+"" nice cursor line highlight
+set cursorline cursorcolumn
+hi CursorLine guibg=#000000 ctermbg=235 cterm=NONE
+hi CursorColumn guibg=#000000 ctermbg=235 cterm=NONE
+
+set list
+set listchars=tab:>.,trail:.,extends:#,nbsp:.
+" Use Q for formatting the current paragraph (or selection)
+vmap Q gq
+nmap Q gqap
+
+" Exec something and restore position
+function! <SID>ExecAndRestore(cmd)
+    " Preparation: save last search, and cursor position.
+    let cmd=a:cmd
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    exec cmd
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+
+" Expand tabs
+nnoremap <silent> <leader>e :call <SID>ExecAndRestore("%s/\t/    /g")<CR>
+" Strip white spaces
+nnoremap <silent> <leader>s :call <SID>ExecAndRestore('%s/\s\+$//e')<CR>
+" sync syntax
+nnoremap <silent> <leader>r :syntax sync fromstart<CR>
+
+" Replace all chars
+function! <SID>ReplaceCharsSrt()
+    exec "%s/á/a/g"
+    exec "%s/é/e/g"
+    exec "%s/í/i/g"
+    exec "%s/ó/o/g"
+    exec "%s/ú/u/g"
+    exec "%s/ñ/ni/g"
+    exec "%s/¡//g"
+    exec "%s/¿//g"
+    exec "%s/<i>//g"
+    exec "%s#</i>##g"
+endfunction
+nnoremap <silent> <leader>c :call <SID>ReplaceCharsSrt()<CR>
+
+" Add the virtualenv's site-packages to vim path
+py << EOF
+import os.path
+import sys
+import vim
+if 'VIRTUAL_ENV' in os.environ:
+    project_base_dir = os.environ['VIRTUAL_ENV']
+    sys.path.insert(0, project_base_dir)
+    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+    execfile(activate_this, dict(__file__=activate_this))
+EOF
+
+set undodir=~/.vim/tmp/undo/ " undo files
+set backupdir=~/.vim/tmp/backup/ " backups
+set directory=~/.vim/tmp/swap/ " swap files
+set backup " enable backups
+
+" Disabled mouse active visual mode
+set mouse-=a
+
+" Paste in paste.elvex.org.ar
+noremap <silent> <leader>o :w !~/bin/paste-code.py --title pastevim<CR>
+
+" use a wrapper script to get http://*
+let g:netrw_http_cmd = "netrw_http_cmd"
+
+" style coding
+"let b:did_ftplugin = 1
+filetype on
+"filetype plugin on
+filetype plugin indent on
+syntax on
+" all types
+set expandtab
+set shiftwidth=2
+set softtabstop=2
+set autoindent
+" python PEP 8
+autocmd FileType python setlocal et
+autocmd FileType python setlocal expandtab
+autocmd FileType python setlocal shiftwidth=4
+autocmd FileType python setlocal softtabstop=4
+autocmd FileType python setlocal sw=4
+autocmd FileType python setlocal smarttab
+"autocmd FileType python setlocal tabstop=8
+autocmd FileType python setlocal autoindent
+" html 2 spaces
+"autocmd FileType html setlocal et
+autocmd FileType html setlocal expandtab
+autocmd FileType html setlocal shiftwidth=2
+autocmd FileType html setlocal softtabstop=2
+autocmd FileType html setlocal sw=2
+autocmd FileType html setlocal smarttab
+"autocmd FileType html setlocal tabstop=2
+autocmd FileType html setlocal autoindent
+" Redefine filetype
+autocmd FileType htmldjango set filetype=htmljinja
+autocmd FileType html set filetype=htmljinja
+"let g:html_indent_inctags = "html,body,head,tbody"
+"let g:html_indent_script1 = "inc"
+"let g:html_indent_style1 = "inc"
+" java
+autocmd FileType java setlocal et
+autocmd FileType java setlocal expandtab
+autocmd FileType java setlocal shiftwidth=4
+autocmd FileType java setlocal softtabstop=4
+autocmd FileType java setlocal sw=4
+autocmd FileType java setlocal smarttab
+autocmd FileType java setlocal autoindent
+
+" syntax js in .py
+function! AddSyntax()
+  let b:current_syntax = ''
+  unlet b:current_syntax
+
+  syntax include @JSCode $VIMRUNTIME/syntax/javascript.vim
+  syntax region rgnJS start='# start js code' end='# end js code' contains=@JSCode
+  let b:current_syntax = ''
+  unlet b:current_syntax
+  let b:current_syntax='combined'
+endfunction
+
+""""""""""""""
+" tmux fixes "
+""""""""""""""
+" Handle tmux $TERM quirks in vim
+if $TERM =~ '^screen-256color'
+    map <Esc>OH <Home>
+    map! <Esc>OH <Home>
+    map <Esc>OF <End>
+    map! <Esc>OF <End>
+endif
+
+" maps keys
+"" disable pageup and pagedown
+nmap <PageUp> <Nop>
+nmap <PageDown> <Nop>
+imap <PageUp> <Nop>
+imap <PageDown> <Nop>
+"" Control + n/p to move in tabs
+nnoremap <silent> <C-n> :tabnext<CR>
+nnoremap <silent> <C-p> :tabprev<CR>
+"" paste toggle
+set pastetoggle=<F6>
+"" Tasklist and taglist
+"nnoremap <silent> <leader>r :syntax sync fromstart<CR>
+"map P :TagbarToggle<CR>
+"map T :TaskList<CR>
+nnoremap <silent> <leader>p :TagbarToggle<CR>
+nnoremap <silent> <leader>n :NERDTreeToggle<CR>
+"nnoremap <silent> <leader>t :TaskList<CR>
+
+autocmd BufEnter *.py call AddSyntax()
+set encoding=utf-8
+set laststatus=2
+let g:Powerline_symbols = 'fancy'
+let g:zenburn_high_Contrast=0
+"colorscheme zenburn
+"colors zenburn
+set background=dark
