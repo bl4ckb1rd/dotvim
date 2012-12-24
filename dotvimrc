@@ -180,6 +180,10 @@ function! AddSyntax()
   let b:current_syntax='combined'
 endfunction
 
+" Show “invisible” characters
+set list "display spaces
+set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_ "everything else
+
 """"""""""""""
 " tmux fixes "
 """"""""""""""
