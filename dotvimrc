@@ -7,9 +7,10 @@ set nocompatible
 " pathogen
 "" vim plugin administrator:
 ""   . install plugins in ~/.vim/bundle/name_plugin/plugin.vim
-filetype off
-call pathogen#helptags()
-call pathogen#runtime_append_all_bundles()
+call pathogen#infect()
+""filetype off
+""call pathogen#helptags()
+""call pathogen#runtime_append_all_bundles()
 
 " set vim options
 " change the mapleader from \ to ,
@@ -203,11 +204,8 @@ nnoremap <silent> <C-p> :tabprev<CR>
 set pastetoggle=<F6>
 "" Tasklist and taglist
 "nnoremap <silent> <leader>r :syntax sync fromstart<CR>
-"map P :TagbarToggle<CR>
-"map T :TaskList<CR>
 nnoremap <silent> <leader>p :TagbarToggle<CR>
 nnoremap <silent> <leader>n :NERDTreeToggle<CR>
-"nnoremap <silent> <leader>t :TaskList<CR>
 
 autocmd BufEnter *.py call AddSyntax()
 set encoding=utf-8
