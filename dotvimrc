@@ -181,8 +181,8 @@ function! AddSyntax()
 endfunction
 
 " Show “invisible” characters
-set list "display spaces
-set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_ "everything else
+"set list "display spaces
+"set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_ "everything else
 
 """"""""""""""
 " tmux fixes "
