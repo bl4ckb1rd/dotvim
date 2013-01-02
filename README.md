@@ -26,3 +26,4 @@ IMPORTANT
 =========
 
 For plugin jedi-vim you need install jedi with `pip install jedi`
+For plugin pyflakes you need install jedi with `pip install pyflakes`
