@@ -215,7 +215,7 @@ autocmd BufEnter *.py call AddSyntax()
 set encoding=utf-8
 set laststatus=2
 let g:Powerline_symbols = 'fancy'
-let g:zenburn_high_Contrast=0
+"let g:zenburn_high_Contrast=0
 "colorscheme zenburn
 "colors zenburn
 set background=dark
