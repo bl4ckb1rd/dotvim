@@ -83,21 +83,6 @@ nnoremap <silent> <leader>s :call <SID>ExecAndRestore('%s/\s\+$//e')<CR>
 " sync syntax
 nnoremap <silent> <leader>r :syntax sync fromstart<CR>
 
-" Replace all chars
-function! <SID>ReplaceCharsSrt()
-    exec "%s/á/a/g"
-    exec "%s/é/e/g"
-    exec "%s/í/i/g"
-    exec "%s/ó/o/g"
-    exec "%s/ú/u/g"
-    exec "%s/ñ/ni/g"
-    exec "%s/¡//g"
-    exec "%s/¿//g"
-    exec "%s/<i>//g"
-    exec "%s#</i>##g"
-endfunction
-nnoremap <silent> <leader>c :call <SID>ReplaceCharsSrt()<CR>
-
 " Add the virtualenv's site-packages to vim path
 py << EOF
 import os.path
@@ -219,3 +204,25 @@ let g:Powerline_symbols = 'fancy'
 "colorscheme zenburn
 "colors zenburn
 set background=dark
+
+"""" Useful functions
+" Replace all chars
+function! <SID>ReplaceCharsSrt()
+    exec "%s/á/a/g"
+    exec "%s/é/e/g"
+    exec "%s/í/i/g"
+    exec "%s/ó/o/g"
+    exec "%s/ú/u/g"
+    exec "%s/ñ/ni/g"
+    exec "%s/¡//g"
+    exec "%s/¿//g"
+    exec "%s/<i>//g"
+    exec "%s#</i>##g"
+endfunction
+nnoremap <silent> <leader>c :call <SID>ReplaceCharsSrt()<CR>
+
+" Insert ipython debug
+function! InsertIpython()
+    r~/.vim/templates/python/ipython.txt
+endfunction
+nnoremap <silent> <leader>i :call InsertIpython()<CR>
