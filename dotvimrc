@@ -112,8 +112,8 @@ let g:netrw_http_cmd = "netrw_http_cmd"
 " style coding
 "let b:did_ftplugin = 1
 filetype on
-"filetype plugin on
-filetype plugin indent on
+filetype plugin on
+"filetype plugin indent on
 syntax on
 " all types
 set expandtab
@@ -204,6 +204,17 @@ let g:Powerline_symbols = 'fancy'
 "colorscheme zenburn
 "colors zenburn
 set background=dark
+
+" Disabled jedi
+let g:jedi#auto_initialization = 0
+
+" pyflakes config
+if has("gui_running")
+  highlight SpellBad term=underline gui=undercurl guisp=Orange
+endif
+
+" syntastic config
+let g:syntastic_python_checkers=['pylint']
 
 """" Useful functions
 " Replace all chars
