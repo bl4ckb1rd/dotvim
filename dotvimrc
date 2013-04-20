@@ -112,8 +112,8 @@ let g:netrw_http_cmd = "netrw_http_cmd"
 " style coding
 "let b:did_ftplugin = 1
 filetype on
-filetype plugin on
-"filetype plugin indent on
+"filetype plugin on
+filetype plugin indent on
 syntax on
 " all types
 set expandtab
