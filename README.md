@@ -9,7 +9,7 @@ INSTALL
 
 1. git clone https://github.com/bl4ckb1rd/dotvim.git ~/.vim
 2. cd ~/.vim/
-3. git submodule init
+3. git submodule init && git submodule update
 4. ln -s ~/.vim/dotvimrc ~/.vimrc
 5. mkdir -p ~/tmp/vim/{undo,backup,swap}
 6. vim then :BundleInstall
