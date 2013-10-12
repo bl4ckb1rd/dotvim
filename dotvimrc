@@ -15,7 +15,7 @@ Bundle 'gmarik/vundle'
 """" Bundle plugins """"
 Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Bundle 'scrooloose/nerdtree'
-Bundle 'terryma/vim-multiple-cursors'
+"Bundle 'terryma/vim-multiple-cursors'
 Bundle 'Shougo/neocomplcache.vim'
 Bundle 'vim-scripts/DotOutlineTree'
 Bundle 'ConradIrwin/vim-bracketed-paste'
@@ -34,6 +34,9 @@ Bundle 'elzr/vim-json'
 Bundle 'davidhalter/jedi-vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'pangloss/vim-javascript'
+Bundle 'kien/rainbow_parentheses.vim'
+Bundle 'Valloric/MatchTagAlways'
+Bundle 'kevinw/pyflakes-vim'
 
 "" Theme plugins
 Bundle 'zeis/vim-kolor'
@@ -214,6 +217,7 @@ nmap <PageDown> <Nop>
 imap <PageUp> <Nop>
 imap <PageDown> <Nop>
 "" Control + n/p to move in tabs
+let g:multi_cursor_next_key='<C-m>'
 nnoremap <silent> <C-n> :tabnext<CR>
 nnoremap <silent> <C-p> :tabprev<CR>
 "" paste toggle
@@ -255,6 +259,7 @@ let g:Powerline_symbols = 'fancy'
 
 " Disabled jedi
 "let g:jedi#auto_initialization = 0
+autocmd FileType python setlocal completeopt-=preview
 
 " pyflakes config
 if has("gui_running")
@@ -263,6 +268,35 @@ endif
 
 " syntastic config
 "let g:syntastic_python_checkers=['pylint']
+
+" rainbow_parentheses
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
+" MatchTagsAlways
+let g:mta_use_matchparen_group = 1
 
 " Theme
 "let g:solarized_termtrans = 1
