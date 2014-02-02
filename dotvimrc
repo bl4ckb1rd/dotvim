@@ -38,6 +38,9 @@ Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'Valloric/MatchTagAlways'
 Bundle 'kevinw/pyflakes-vim'
 
+"" Math plugins
+Bundle 'Rykka/mathematic.vim'
+
 "" Theme plugins
 Bundle 'zeis/vim-kolor'
 Bundle 'altercation/vim-colors-solarized'
@@ -257,17 +260,19 @@ nnoremap <silent> <leader>i :call InsertIpython()<CR>
 set laststatus=2
 let g:Powerline_symbols = 'fancy'
 
+" syntastic config
+"let g:syntastic_python_checkers=['pylint']
+let g:syntastic_python_python_exe = 'python2'
+
 " Disabled jedi
 "let g:jedi#auto_initialization = 0
 autocmd FileType python setlocal completeopt-=preview
 
-" pyflakes config
-if has("gui_running")
-  highlight SpellBad term=underline gui=undercurl guisp=Orange
-endif
-
-" syntastic config
-"let g:syntastic_python_checkers=['pylint']
+" mathematica cnfig
+" use it
+map <leader>km :set keymap=mathematic<CR>
+" stop use it
+map <leader>kn :set keymap=<CR>
 
 " rainbow_parentheses
 let g:rbpt_colorpairs = [
@@ -303,4 +308,13 @@ let g:mta_use_matchparen_group = 1
 syntax enable
 set background=dark
 colorscheme wombat256mod
+" "draw" line on column 80
+set colorcolumn=80
 "colorscheme solarized
+"" Change higligth!!
+hi SpellBad term=reverse ctermbg=1 gui=undercurl guisp=Red
+hi SpellCap term=reverse ctermbg=1 gui=undercurl guisp=Red
+hi SpellLocal term=reverse ctermbg=1 gui=undercurl guisp=Red
+hi SpellRare term=reverse ctermbg=1 gui=undercurl guisp=Red
+
+set completeopt-=preview
