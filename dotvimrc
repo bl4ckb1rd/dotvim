@@ -1,6 +1,4 @@
 " vimrc by Bl4ckB1rd
-" init: 2011/04/13
-" last: 2013/05/22
 
 set nocompatible
 filetype off
@@ -21,6 +19,9 @@ Bundle 'vim-scripts/DotOutlineTree'
 Bundle 'ConradIrwin/vim-bracketed-paste'
 Bundle 'wesleyche/SrcExpl'
 
+"" Organizers
+Bundle 'hsitz/VimOrganizer'
+
 "" Git plugins
 Bundle 'tpope/vim-fugitive'
 Bundle 'gregsexton/gitv'
@@ -31,12 +32,15 @@ Bundle 'vim-scripts/TaskList.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'lepture/vim-jinja'
 Bundle 'elzr/vim-json'
-Bundle 'davidhalter/jedi-vim'
+"Bundle 'davidhalter/jedi-vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'pangloss/vim-javascript'
 Bundle 'kien/rainbow_parentheses.vim'
 Bundle 'Valloric/MatchTagAlways'
 Bundle 'kevinw/pyflakes-vim'
+Bundle 'nvie/vim-flake8'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'Shougo/unite.vim'
 
 "" Math plugins
 Bundle 'Rykka/mathematic.vim'
@@ -261,12 +265,16 @@ set laststatus=2
 let g:Powerline_symbols = 'fancy'
 
 " syntastic config
-"let g:syntastic_python_checkers=['pylint']
+" TODO Add shellcheck
+let g:flake8_cmd='/usr/bin/flake8-python2'
+let g:syntastic_check_on_open=1
 let g:syntastic_python_python_exe = 'python2'
+let g:syntastic_python_checkers=['flake8']
 
 " Disabled jedi
 "let g:jedi#auto_initialization = 0
 autocmd FileType python setlocal completeopt-=preview
+"autocmd FileType python
 
 " mathematica cnfig
 " use it
@@ -317,4 +325,4 @@ hi SpellCap term=reverse ctermbg=1 gui=undercurl guisp=Red
 hi SpellLocal term=reverse ctermbg=1 gui=undercurl guisp=Red
 hi SpellRare term=reverse ctermbg=1 gui=undercurl guisp=Red
 
-set completeopt-=preview
+"set completeopt-=preview
