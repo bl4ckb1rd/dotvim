@@ -11,7 +11,8 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 """" Bundle plugins """"
-Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+"Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Bundle 'bling/vim-airline'
 Bundle 'scrooloose/nerdtree'
 "Bundle 'terryma/vim-multiple-cursors'
 Bundle 'Shougo/neocomplcache.vim'
@@ -75,9 +76,13 @@ set visualbell           " don't beep
 set noerrorbells         " don't beep
 set wildmode=longest:full,full
 set wildmenu
+
+set splitright
+set splitbelow
+
 " Highlight Warning on 79+ lines and Error on 81+
-au BufWinEnter * let w:m1=matchadd('Search', '\%<81v.\%>79v', -1)
-au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+"au BufWinEnter * let w:m1=matchadd('Search', '\%<81v.\%>79v', -1)
+"au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 
 autocmd BufEnter * lcd %:p:h " change directory the current file's
 
@@ -261,8 +266,12 @@ nnoremap <silent> <leader>i :call InsertIpython()<CR>
 
 "" XXX Config Bundle's
 " Powerline setup
+" airline setup
+"set laststatus=2
+"let g:Powerline_symbols = 'fancy'
 set laststatus=2
-let g:Powerline_symbols = 'fancy'
+let g:airline_powerline_fonts = 1
+"let g:airline_symbols
 
 " syntastic config
 " TODO Add shellcheck
