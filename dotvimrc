@@ -19,13 +19,8 @@ Plugin 'vim-scripts/DotOutlineTree'
 Plugin 'ConradIrwin/vim-bracketed-paste'
 Plugin 'wesleyche/SrcExpl'
 Plugin 'mbbill/undotree'
-Plugin 'Shougo/unite.vim'
 " http://vimawesome.com/plugin/ctrlp-vim-state-of-grace
 Plugin 'kien/ctrlp.vim'
-" http://vimawesome.com/plugin/numbers-vim
-" nnoremap <F3> :NumbersToggle<CR>
-" nnoremap <F4> :NumbersOnOff<CR>
-Plugin 'myusuf3/numbers.vim'
 " http://vimawesome.com/plugin/easymotion
 Plugin 'Lokaltog/vim-easymotion'
 
