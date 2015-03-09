@@ -46,7 +46,7 @@ Plugin 'thinca/vim-ref'
 Plugin 'scrooloose/nerdcommenter'
 """ syntaxt
 Plugin 'lepture/vim-jinja'
-Plugin 'elzr/vim-json'
+"Plugin 'elzr/vim-json'
 Plugin 'pangloss/vim-javascript'
 " http://vimawesome.com/plugin/vim-markdown-safe-and-sound
 Plugin 'tpope/vim-markdown'
@@ -67,7 +67,9 @@ Plugin 'Valloric/YouCompleteMe'
 " http://vimawesome.com/plugin/auto-pairs
 Plugin 'jiangmiao/auto-pairs'
 " http://vimawesome.com/plugin/indentline
-Plugin 'Yggdroot/indentLine'
+"Plugin 'Yggdroot/indentLine'
+" completition DB stuff
+Plugin 'dbext.vim'
 
 "" Math plugins
 Plugin 'Rykka/mathematic.vim'
@@ -317,6 +319,9 @@ if has("persistent_undo")
     set undodir='~/.undodir/'
     set undofile
 endif
+
+" ctrlp config
+let g:ctrlp_map = '<c-j>'
 
 " mathematica cnfig
 " use it
