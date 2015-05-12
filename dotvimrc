@@ -200,12 +200,12 @@ autocmd FileType python setlocal sw=4
 autocmd FileType python setlocal smarttab
 "autocmd FileType python setlocal tabstop=8
 autocmd FileType python setlocal autoindent
-" html 2 spaces
+" html 4 spaces
 "autocmd FileType html setlocal et
 autocmd FileType html setlocal expandtab
-autocmd FileType html setlocal shiftwidth=2
-autocmd FileType html setlocal softtabstop=2
-autocmd FileType html setlocal sw=2
+autocmd FileType html setlocal shiftwidth=4
+autocmd FileType html setlocal softtabstop=4
+autocmd FileType html setlocal sw=4
 autocmd FileType html setlocal smarttab
 "autocmd FileType html setlocal tabstop=2
 autocmd FileType html setlocal autoindent
