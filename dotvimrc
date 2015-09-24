@@ -178,9 +178,6 @@ set backup " enable backups
 " Disabled mouse active visual mode
 set mouse-=a
 
-" Paste in paste.elvex.org.ar
-noremap <silent> <leader>o :w !~/bin/paste-code.py --title pastevim<CR>
-
 " use a wrapper script to get http://*
 let g:netrw_http_cmd = "netrw_http_cmd"
 
