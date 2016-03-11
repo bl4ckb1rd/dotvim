@@ -45,6 +45,7 @@ Plugin 'thinca/vim-ref'
 """ comment
 " http://vimawesome.com/plugin/the-nerd-commenter
 Plugin 'scrooloose/nerdcommenter'
+
 """ syntaxt
 Plugin 'lepture/vim-jinja'
 "Plugin 'elzr/vim-json'
@@ -61,16 +62,19 @@ Plugin 'scrooloose/syntastic'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'Valloric/MatchTagAlways'
 """ Python
+Plugin 'klen/python-mode'
 Plugin 'kevinw/pyflakes-vim'
 Plugin 'nvie/vim-flake8'
-"""
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'Shougo/neocomplete.vim'
+""" ycm give an error 2016/03/08
+" Plugin 'Valloric/YouCompleteMe'
+"Plugin 'davidhalter/jedi-vim'
 " http://vimawesome.com/plugin/auto-pairs
 Plugin 'jiangmiao/auto-pairs'
 " http://vimawesome.com/plugin/indentline
 "Plugin 'Yggdroot/indentLine'
 " completition DB stuff
-Plugin 'dbext.vim'
+"Plugin 'dbext.vim'
 
 "" Math plugins
 Plugin 'Rykka/mathematic.vim'
@@ -83,6 +87,8 @@ Plugin 'bl4ckb1rd/wombat256.vim'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+filetype on            " enables filetype detection
+filetype plugin on     " enables filetype specific plugins
 
 " The rest of your config follows here
 " change the mapleader from \ to ,
@@ -221,6 +227,14 @@ autocmd FileType java setlocal softtabstop=4
 autocmd FileType java setlocal sw=4
 autocmd FileType java setlocal smarttab
 autocmd FileType java setlocal autoindent
+" javascript
+autocmd FileType javascript setlocal et
+autocmd FileType javascript setlocal expandtab
+autocmd FileType javascript setlocal shiftwidth=4
+autocmd FileType javascript setlocal softtabstop=4
+autocmd FileType javascript setlocal sw=4
+autocmd FileType javascript setlocal smarttab
+autocmd FileType javascript setlocal autoindent
 
 " syntax js in .py
 function! AddSyntax()
@@ -250,6 +264,11 @@ if $TERM =~ '^screen-256color'
 endif
 
 " maps keys
+"" remap move around splited window
+"nmap <silent> <A-Up> :wincmd k<CR>
+"nmap <silent> <A-Down> :wincmd j<CR>
+"nmap <silent> <A-Left> :wincmd h<CR>
+"nmap <silent> <A-Right> :wincmd l<CR>
 "" disable pageup and pagedown
 nmap <PageUp> <Nop>
 nmap <PageDown> <Nop>
@@ -302,18 +321,71 @@ let g:airline_powerline_fonts = 1
 
 " syntastic config
 " TODO Add shellcheck
-let g:flake8_cmd='/usr/bin/flake8-python2'
+"let g:flake8_cmd='/usr/bin/flake8-python2'
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 let g:syntastic_check_on_open=1
-let g:syntastic_python_python_exe = 'python2'
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_wq = 0
+"let g:syntastic_python_checkers=['flake8', 'pylint']
 let g:syntastic_python_checkers=['flake8']
+let g:syntastic_python_python_exe = '/usr/bin/python3'
+
+" ycm
+" let g:ycm_python_binary_path = '/usr/bin/python3'
+
+" jedi-vim
+""" Disabled jedi
+"let g:jedi#auto_initialization = 0
+"let g:jedi#popup_select_first = 0
+"let g:jedi#show_call_signatures = "1"
+autocmd FileType python setlocal completeopt-=preview
+"autocmd FileType python
+
+
+" XXX Python-mode
+" don't use linter, we use syntastic for that
+let g:pymode_lint_on_write = 0
+let g:pymode_lint_signs = 0
+" don't fold python code on open
+let g:pymode_folding = 0
+" don't load rope by default. Change to 1 to use rope
+let g:pymode_rope = 0
+" open definitions on same window, and custom mappings for definitions and
+" occurrences
+let g:pymode_rope_goto_definition_bind = ',d'
+let g:pymode_rope_goto_definition_cmd = 'e'
+nmap ,D :tab split<CR>:PymodePython rope.goto()<CR>
+nmap ,o :RopeFindOccurrences<CR>
+
+" XXX neocomplete
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+
 
 " gundo
 nnoremap <F5> :GundoToggle<CR>
-
-" Disabled jedi
-"let g:jedi#auto_initialization = 0
-autocmd FileType python setlocal completeopt-=preview
-"autocmd FileType python
 
 " Undo persistent
 if has("persistent_undo")
