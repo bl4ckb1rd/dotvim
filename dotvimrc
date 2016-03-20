@@ -12,12 +12,13 @@ Plugin 'gmarik/Vundle.vim'
 
 
 """" Plugin plugins """"
+"" StatusLine
 Plugin 'bling/vim-airline'
+"" Explorer
 Plugin 'scrooloose/nerdtree'
-Plugin 'Shougo/neocomplcache.vim'
-Plugin 'vim-scripts/DotOutlineTree'
+"" transparent pasting
 Plugin 'ConradIrwin/vim-bracketed-paste'
-Plugin 'wesleyche/SrcExpl'
+
 Plugin 'mbbill/undotree'
 " http://vimawesome.com/plugin/ctrlp-vim-state-of-grace
 Plugin 'kien/ctrlp.vim'
@@ -36,8 +37,11 @@ Plugin 'airblade/vim-gitgutter'
 " http://vimawesome.com/plugin/git-zip
 Plugin 'tpope/vim-git'
 
-"" Dev plugins
-"""
+""" Dev plugins
+"" Source Code Explorer
+Plugin 'wesleyche/SrcExpl'
+"" Autocomplete
+Plugin 'Shougo/neocomplcache.vim'
 Plugin 'vim-scripts/TaskList.vim'
 Plugin 'majutsushi/tagbar'
 " http://vimawesome.com/plugin/ref-vim
@@ -263,7 +267,7 @@ if $TERM =~ '^screen-256color'
     map! <Esc>OF <End>
 endif
 
-" maps keys
+" XXX maps keys
 "" remap move around splited window
 "nmap <silent> <A-Up> :wincmd k<CR>
 "nmap <silent> <A-Down> :wincmd j<CR>
@@ -284,6 +288,7 @@ set pastetoggle=<F6>
 "nnoremap <silent> <leader>r :syntax sync fromstart<CR>
 nnoremap <silent> <leader>p :TagbarToggle<CR>
 nnoremap <silent> <leader>n :NERDTreeToggle<CR>
+nmap <F8> :SrcExplToggle<CR>
 
 autocmd BufEnter *.py call AddSyntax()
 set encoding=utf-8
@@ -311,13 +316,9 @@ endfunction
 nnoremap <silent> <leader>i :call InsertIpython()<CR>
 
 "" XXX Config Bundle's
-" Powerline setup
 " airline setup
-"set laststatus=2
-"let g:Powerline_symbols = 'fancy'
 set laststatus=2
 let g:airline_powerline_fonts = 1
-"let g:airline_symbols
 
 " syntastic config
 " TODO Add shellcheck
