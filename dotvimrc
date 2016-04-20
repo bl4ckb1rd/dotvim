@@ -1,4 +1,6 @@
 " vimrc by Bl4ckB1rd
+" srcs:
+"  . https://github.com/fisadev/fisa-vim-config/blob/master/.vimrc
 
 set nocompatible
 filetype off
@@ -17,11 +19,12 @@ Plugin 'bling/vim-airline'
 "" Explorer
 Plugin 'scrooloose/nerdtree'
 "" transparent pasting
+Plugin 'vim-scripts/DotOutlineTree'
 Plugin 'ConradIrwin/vim-bracketed-paste'
 
 Plugin 'mbbill/undotree'
 " http://vimawesome.com/plugin/ctrlp-vim-state-of-grace
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 " http://vimawesome.com/plugin/easymotion
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'sjl/gundo.vim'
@@ -53,6 +56,7 @@ Plugin 'scrooloose/nerdcommenter'
 """ syntaxt
 Plugin 'lepture/vim-jinja'
 "Plugin 'elzr/vim-json'
+" javascript
 Plugin 'pangloss/vim-javascript'
 " http://vimawesome.com/plugin/vim-markdown-safe-and-sound
 Plugin 'tpope/vim-markdown'
@@ -67,8 +71,8 @@ Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'Valloric/MatchTagAlways'
 """ Python
 Plugin 'klen/python-mode'
-Plugin 'kevinw/pyflakes-vim'
-Plugin 'nvie/vim-flake8'
+"Plugin 'kevinw/pyflakes-vim'
+"Plugin 'nvie/vim-flake8'
 Plugin 'Shougo/neocomplete.vim'
 """ ycm give an error 2016/03/08
 " Plugin 'Valloric/YouCompleteMe'
@@ -347,6 +351,34 @@ autocmd FileType python setlocal completeopt-=preview
 
 
 " XXX Python-mode
+" let pymode = 1
+" let pymode_breakpoint = 1
+" let pymode_breakpoint_bind = '<leader>b'
+" let pymode_run_bind = '<leader>r'
+" let pymode_doc = 1
+" let pymode_doc_bind = 'K'
+" let pymode_folding = 0
+" let pymode_indent = 1
+" let pymode_lint = 1
+" let pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
+" let pymode_lint_cwindow = 1
+" let pymode_lint_ignore = ''
+" let pymode_lint_message = 1
+" let pymode_lint_on_fly = 0
+" let pymode_lint_on_write = 0
+" let pymode_lint_select = ''
+" let pymode_lint_signs = 0
+" let pymode_motion = 1
+" let pymode_options = 1
+" let pymode_paths = []
+" let pymode_quickfix_maxheight = 6
+" let pymode_quickfix_minheight = 3
+" let pymode_rope = 0
+" let pymode_run = 1
+" let pymode_trim_whitespaces = 1
+" let pymode_virtualenv = 1
+" let g:pymode_python = 'python3'
+let g:pymode_options_colorcolumn = 1
 " don't use linter, we use syntastic for that
 let g:pymode_lint_on_write = 0
 let g:pymode_lint_signs = 0
@@ -362,6 +394,7 @@ nmap ,D :tab split<CR>:PymodePython rope.goto()<CR>
 nmap ,o :RopeFindOccurrences<CR>
 
 " XXX neocomplete
+" TODO ver como mejorar que no popee en todas las palabras cuando me muevo
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
 " Use neocomplete.
@@ -371,6 +404,7 @@ let g:neocomplete#enable_smart_case = 1
 " Set minimum syntax keyword length.
 let g:neocomplete#sources#syntax#min_keyword_length = 3
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -384,7 +418,6 @@ if !exists('g:neocomplete#sources#omni#input_patterns')
   let g:neocomplete#sources#omni#input_patterns = {}
 endif
 
-
 " gundo
 nnoremap <F5> :GundoToggle<CR>
 
@@ -396,6 +429,13 @@ endif
 
 " ctrlp config
 let g:ctrlp_map = '<c-j>'
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc
+"let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+"let g:ctrlp_custom_ignore = {
+"  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+"  \ 'file': '\v\.(exe|so|dll)$',
+"  \ 'link': 'some_bad_symbolic_links',
+"  \ }
 
 " mathematica cnfig
 " use it
@@ -437,7 +477,7 @@ let g:mta_use_matchparen_group = 1
 syntax enable
 set background=dark
 colorscheme wombat256mod
-" "draw" line on column 80
+" draw line on column 80
 set colorcolumn=80
 "colorscheme solarized
 "" Change higligth!!
@@ -447,3 +487,5 @@ hi SpellLocal term=reverse ctermbg=1 gui=undercurl guisp=Red
 hi SpellRare term=reverse ctermbg=1 gui=undercurl guisp=Red
 
 "set completeopt-=preview
+set nonumber
+setlocal nonumber
