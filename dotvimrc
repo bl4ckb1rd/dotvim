@@ -497,6 +497,8 @@ hi SpellCap term=reverse ctermbg=1 gui=undercurl guisp=Red
 hi SpellLocal term=reverse ctermbg=1 gui=undercurl guisp=Red
 hi SpellRare term=reverse ctermbg=1 gui=undercurl guisp=Red
 
-"set completeopt-=preview
+" YCM prevent open split with preview
+set completeopt-=preview
+" disable number of lines
 set nonumber
 setlocal nonumber
