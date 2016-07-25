@@ -52,6 +52,8 @@ Plugin 'thinca/vim-ref'
 """ comment
 " http://vimawesome.com/plugin/the-nerd-commenter
 Plugin 'scrooloose/nerdcommenter'
+""" virtualenv https://github.com/jmcantrell/vim-virtualenv
+"Plugin 'jmcantrell/vim-virtualenv'
 
 """ syntaxt
 Plugin 'lepture/vim-jinja'
@@ -172,7 +174,7 @@ nnoremap <silent> <leader>s :call <SID>ExecAndRestore('%s/\s\+$//e')<CR>
 " sync syntax
 nnoremap <silent> <leader>r :syntax sync fromstart<CR>
 
-" Add the virtualenv's site-packages to vim path
+"" Add the virtualenv's site-packages to vim path
 py << EOF
 import os.path
 import sys
@@ -294,6 +296,9 @@ set pastetoggle=<F6>
 nnoremap <silent> <leader>p :TagbarToggle<CR>
 nnoremap <silent> <leader>n :NERDTreeToggle<CR>
 nmap <F8> :SrcExplToggle<CR>
+" resize
+nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
+nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
 
 autocmd BufEnter *.py call AddSyntax()
 set encoding=utf-8
@@ -335,8 +340,8 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_wq = 1
-let g:syntastic_python_checkers=['flake8', 'pylint']
-"let g:syntastic_python_checkers=['flake8']
+"let g:syntastic_python_checkers=['flake8', 'pylint']
+let g:syntastic_python_checkers=['flake8']
 let g:syntastic_python_python_exe = '/usr/bin/python3'
 
 " XXX ycm YouCompleteMe
