@@ -93,6 +93,8 @@ Plugin 'Rykka/mathematic.vim'
 Plugin 'zeis/vim-kolor'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'bl4ckb1rd/wombat256.vim'
+Plugin 'jacoborus/tender.vim'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -337,9 +339,9 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_check_on_open = 1
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_wq = 1
+let g:syntastic_always_populate_loc_list = 1 "0
+let g:syntastic_auto_loc_list = 1 "0
+let g:syntastic_check_on_wq = 0 "1
 "let g:syntastic_python_checkers=['flake8', 'pylint']
 let g:syntastic_python_checkers=['flake8']
 let g:syntastic_python_python_exe = '/usr/bin/python3'
@@ -460,19 +462,26 @@ let g:mta_use_matchparen_group = 1
 
 " Theme
 "let g:solarized_termtrans = 1
+" set guicolors
 syntax enable
 set background=dark
-colorscheme wombat256mod
+" colorscheme wombat256mod
+colorscheme tender
 set colorcolumn=79
+" enable tender airline theme
+let g:tender_airline = 1
+" set airline theme
+let g:airline_theme = 'tender'
 "colorscheme solarized
 "" Change higligth!!
-hi SpellBad term=reverse ctermbg=1 gui=undercurl guisp=Red
-hi SpellCap term=reverse ctermbg=1 gui=undercurl guisp=Red
-hi SpellLocal term=reverse ctermbg=1 gui=undercurl guisp=Red
-hi SpellRare term=reverse ctermbg=1 gui=undercurl guisp=Red
+" hi SpellBad term=reverse ctermbg=1 gui=undercurl guisp=Red
+" hi SpellCap term=reverse ctermbg=1 gui=undercurl guisp=Red
+" hi SpellLocal term=reverse ctermbg=1 gui=undercurl guisp=Red
+" hi SpellRare term=reverse ctermbg=1 gui=undercurl guisp=Red
 
 " YCM prevent open split with preview
 set completeopt-=preview
 " disable number of lines
-set nonumber
-setlocal nonumber
+"set nonumber
+"setlocal nonumber
+set number
