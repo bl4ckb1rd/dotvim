@@ -460,6 +460,11 @@ au Syntax * RainbowParenthesesLoadBraces
 " MatchTagsAlways
 let g:mta_use_matchparen_group = 1
 
+
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+" src: http://stackoverflow.com/a/7078429/966181
+cmap w!! w !sudo tee > /dev/null %
+
 " Theme
 "let g:solarized_termtrans = 1
 " set guicolors
